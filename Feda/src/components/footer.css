@@ -1,0 +1,15 @@
+/* FooterStyles.css */
+
+.footer {
+    position: fixed;          /* Fija el footer en la parte inferior de la pantalla */
+    bottom: 0;                /* Ubicación en la parte inferior */
+    left: 5%;                 /* Deja un margen a la izquierda para que quede centrado dentro del 90% */
+    width: 90%;               /* Ancho del 90% */
+    background-color:transparent;   /* Color de fondo (puedes cambiarlo según el estilo deseado) */
+    color: #fff;              /* Color del texto */
+    padding: 10px;            /* Espaciado interno */
+    text-align: center;       /* Centra el contenido dentro del footer */
+    z-index: 10;              /* Asegura que el footer esté sobre otros elementos */
+  }
+  
+  
