@@ -43,14 +43,7 @@ const networks = {
       abi: loadABI(path.join(__dirname, 'deployments/Polygon/ProjectManagement.json'))
     },
   },
-  amoy:{
-    name: 'polygonAmoy',
-    projectManagement: {
-      address:"0xc4cA1D09259bB902b1c0b6c0Ff3C9dcf799d9A5b",
-      abi: loadABI(path.join(__dirname, 'deployments/amoy/ProjectManagement.json'))
-    },
-
-  }
+  
 
   // Agrega el resto de las redes según sea necesario
 };
