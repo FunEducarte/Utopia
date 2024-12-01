@@ -52,6 +52,8 @@ const createProject = async (req, res) => {
         world: projectData.world,
         owner: projectData.owner,                  // Propietario
         platform: projectData.platform,
+        latitude: projectData.latitude,
+        longitude: projectData.longitude,
         transactionHash: signedTransaction,  // Guardar el hash de la transacción
         created_at: new Date(),
       });
@@ -109,6 +111,8 @@ const getAllProjects = async (req, res) => {
       platform: project.platform,            // Plataforma
       mainLink: project.mainLink,            // Enlace principal
       owner: project.owner,                  // Propietario
+      longitude: project.longitude,
+      latitude: project.latitude,
       createdAt: project.created_at,         // Fecha de creación (de Supabase)
       icon_url: project.icon,                // URL del icono
       world: project.world                   // Mundo al que pertenece el proyecto
@@ -136,3 +140,4 @@ module.exports = {
   getAllProjects,
   getContractDetails
 };
+
