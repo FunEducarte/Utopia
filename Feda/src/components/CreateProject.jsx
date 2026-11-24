@@ -1,34 +1,50 @@
 import { useState } from 'react';
-import { useEthersSigner } from '../services/Signer';
-import { createProjectOnChain } from '../services/assetservice';
+import { useEthersSigner } from '../services/signer';
+import { createWorld } from '../services/metaverse';
+import { useChainId } from 'wagmi';
+import ConfettiButton from './buttonconf';
 
-const CreateProjectComponent = ({ projectData }) => {
-  const signer = useEthersSigner(); // Obtén el signer del usuario conectado
-  const [loading, setLoading] = useState(false); // Estado para manejar el loading
-  const [error, setError] = useState(null); // Estado para manejar errores
-  const [success, setSuccess] = useState(null); // Estado para manejar el éxito
+const chainIdToName = {
+  43113: "fuji",
+  1: 'ethereum',
+  137: 'polygon',
+  56: 'bsc',
+  97:'tBNB',
+  80002: 'amoy',
+  43114: 'avalanche',
+  10: 'optimism',
+  42161: 'arbitrum',
+  11155111: 'sepolia',
+};
+
+const CreateProjectComponent = ({ worldData }) => {
+  const signer = useEthersSigner();
+  const chain = useChainId();
+  const networkName = chainIdToName[chain];
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false); // solo booleano
 
   const handleCreateProject = async () => {
     try {
       setLoading(true);
-      setError(null); // Limpiar el estado del error antes de intentar
-      setSuccess(null); // Limpiar el éxito antes de intentar
+      setError(null);
+      setSuccess(false);
 
       if (!signer) {
-        console.log('Signer:', signer); // Verifica si signer está definido
         throw new Error('Conecta tu wallet');
-        
       }
 
-      // Aquí llamas a tu función para crear el proyecto en la blockchain
-      const result = await createProjectOnChain(projectData, signer);
-      setSuccess('Proyecto creado con éxito');
+      const result = await createWorld(networkName, signer, worldData);
+      setSuccess(true);
+      console.log("Datos enviados:", worldData);
       console.log('Proyecto creado con éxito:', result);
-
+      console.log('Chain ID:', chain);
+      console.log('Network Name:', networkName);
     } catch (error) {
       setError('Error al crear el proyecto: ' + error.message);
-      console.error('Error al crear el proyecto:', error);
-
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -36,15 +52,12 @@ const CreateProjectComponent = ({ projectData }) => {
 
   return (
     <div>
-      <button
+      <ConfettiButton
         onClick={handleCreateProject}
-        disabled={loading}
-      >
-        {loading ? 'Creando proyecto...' : 'Crear proyecto'}
-      </button>
-
+        loading={loading}
+        success={success}
+      />
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
     </div>
   );
 };

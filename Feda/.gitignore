@@ -8,6 +8,20 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.env
+.env.*
+!.env.example
+!.env.*.example
+micelio.env
+micelio-data/
+.utopy-private/
+artifacts/
+*.db
+*.sqlite
+*.pem
+*.key
+*.p12
+*.pfx
 dist
 dist-ssr
 *.local

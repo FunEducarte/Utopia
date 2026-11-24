@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Anton', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -65,4 +65,15 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+.cm-editor, .cm-scroller {
+  background-color:transparent !important; /* fondo negro con 60% opacidad */
+}
+
+.cm-editor .cm-content {
+  background-color: transparent !important; /* el contenido sigue transparente */
+}
+
+.cm-editor .cm-gutters {
+  background-color: rgba(0, 0, 0, 0.3) !important; /* opcional: las guters con menos opacidad */
 }

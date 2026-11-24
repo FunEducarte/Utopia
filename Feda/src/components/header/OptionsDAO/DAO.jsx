@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { RiMailOpenLine, RiDraftLine, RiFileDownloadLine } from '@remixicon/react';
+import { RiMailOpenLine, RiFileDownloadLine, RiBardLine, RiFlaskLine } from '@remixicon/react';
 import styled from 'styled-components';
 
 // Estilos con styled-components
@@ -56,8 +56,8 @@ const ActionButtons = styled.div`
 
     &:hover {
       opacity: 0.9;
-      background-color: #023EBA;
-      background-image: url('/img/world.png'); /* Imagen del mundo al hacer hover */
+      background-color:trasnparent;
+      background-image: trasnparent; /* Imagen del mundo al hacer hover */
       background-position: center;
       background-size: cover;
     }
@@ -69,7 +69,7 @@ const DownloadLink = styled.a`
   align-items: center;
   text-decoration: none;
   font-size: 18px;
-  color: #007bff;
+  color:rgb(0, 255, 98);
   margin-top: 10px;
 
   svg {
@@ -99,8 +99,10 @@ const ImageContainer = styled.img`
 
 
 const DAOoptions = ({ onClose }) => {
+  const [showAI, setShowAI] = useState(false);
   const daoHausLink = 'https://admin.daohaus.club/#/molochv3/0x89/0x6acd5bfc1f2ffa05f08501063f32b9d43cb27de1'; 
   const popupRef = useRef(null);
+  
 
   // Detectar clics fuera del popup
   useEffect(() => {
@@ -128,19 +130,20 @@ const DAOoptions = ({ onClose }) => {
           >
             <RiMailOpenLine size={24} />
           </button>
-          <button
-            onClick={() => window.open(daoHausLink, '_blank')}
-          >
-            <RiDraftLine size={24} />
+           {/* Reemplazado: El botón ahora abre la IA */}
+           <button onClick={() => setShowAI(!showAI)}>
+            <RiFlaskLine size={24} />
           </button>
         </ActionButtons>
+
+        {showAI && <DecentralizedAI />} 
         <DownloadLink 
   href="/Whitepaper FEDA.pdf" 
   target="_blank" 
   rel="noopener noreferrer"
 >
   <RiFileDownloadLine size={24} />
-  Ver Whitepaper
+Whitepaper
 </DownloadLink>
 
 

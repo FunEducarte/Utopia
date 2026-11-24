@@ -1,11 +1,9 @@
-// Modal.jsx 
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { RiCloseLine } from '@remixicon/react';
 import { useNavigate } from 'react-router-dom';
 
-
-const Modal = ({ closeModal, world }) => {
+const Modal = ({ closeModal }) => {
   const navigate = useNavigate();
 
   const handleCreateAsset = () => {
@@ -14,8 +12,7 @@ const Modal = ({ closeModal, world }) => {
   };
 
   const handleJoinProject = () => {
-    // Aquí usamos el valor real de world
-    navigate(`/join-asset/${world}`);
+    navigate(`/join-asset`);
     closeModal();
   };
 
@@ -23,23 +20,20 @@ const Modal = ({ closeModal, world }) => {
     <Overlay onClick={closeModal}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={closeModal}>
-          <RiCloseLine size={24} />
+          <RiCloseLine size={20} />
         </CloseButton>
 
         <Option onClick={handleCreateAsset}>
           <img src="/img/OpcionCrear.png" alt="Crear Activo" />
-          <p>Create Asset</p>
         </Option>
         <Option onClick={handleJoinProject}>
           <img src="/img/OpcionVisualizar.png" alt="Unirse a Proyecto" />
-          <p>Join Project</p>
         </Option>
       </ModalContent>
     </Overlay>
   );
 };
 
-// Keyframes para animar la apertura del modal
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -53,26 +47,28 @@ const fadeIn = keyframes`
 
 const Overlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.4);
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
 `;
 
 const ModalContent = styled.div`
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 300px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   position: relative;
-  animation: ${fadeIn} 0.3s ease-out;
+  animation: ${fadeIn} 0.25s ease-out;
+  text-align: center;
 `;
 
 const CloseButton = styled.button`
@@ -82,27 +78,34 @@ const CloseButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
+  color: #888;
 `;
 
 const Option = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 12px 0;
   cursor: pointer;
+  transition: transform 0.2s ease;
 
   img {
-    width: 350px;
-    height: 350px;
-    margin-bottom: 10px;
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 8px;
   }
 
   p {
+    font-size: 16px;
+    font-weight: 500;
     margin: 0;
+    color: #333;
   }
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';  
 import styled from 'styled-components';
 import CustomButton from './HamburguerButton'; // Asegúrate de que está correctamente importado
 import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -19,7 +19,7 @@ const MenuContainer = styled.div`
   transition: all 0.3s ease-in-out;
 `;
 
-// Estilos de los ítems dentro del menú (puedes agregar más ítems aquí si es necesario)
+// Estilos de los ítems dentro del menú
 const MenuItem = styled.div`
   padding: 10px 20px;
   color: white;
@@ -30,23 +30,26 @@ const MenuItem = styled.div`
   &:last-child {
     border-bottom: none;
   }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 `;
 
-// Componente principal del menú
 const Menu = () => {
-  const [isOpen, setIsOpen] = useState(false); // Estado para abrir/cerrar menú
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Alterna el estado del menú
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+
   return (
     <>
-      <CustomButton isOpened={isOpen} toggleMenu={toggleMenu} /> {/* HamburguerButton con props */}
+      <CustomButton isOpened={isOpen} toggleMenu={toggleMenu} />
       <MenuContainer isOpen={isOpen}>
         <MenuItem>
-          <ConnectButton/>
+          <ConnectButton />
         </MenuItem>
       </MenuContainer>
     </>
@@ -54,4 +57,3 @@ const Menu = () => {
 };
 
 export default Menu;
-
